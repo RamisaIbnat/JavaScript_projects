@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <title>Hero Converter</title>
+        <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+        <style>
+            body{
+                background-color: aqua;
+                color: navy;
+            }
+            .Cont{
+                height: 47%;
+                width: 24%;
+                position: relative;
+                display: inline-block;
+                /* border: 1px solid black; */
+                margin: 10%;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 100%;
+            }
+            .nav{
+                width: 90%;
+                position: relative;
+                display: inline-block;
+                /* border: 1px solid black; */
+                margin: 5%;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 100%;
+            }
+            .textBox{
+                width: 40%;
+                margin-left:5%;
+                position: relative;
+                display: inline-block;
+                border: 1px solid black;
+                background-color: aliceblue;
+            }
+            #submitButton{
+                cursor:pointer;
+                margin-top: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <div class="Cont">
+
+                <span>Input Series of Numbers</span>
+
+                <input type="text" placeholder="Example 12,54,1,56,767" id="inputID">
+
+                <span class="nav" id="MaxID">Max: <span class="textBox">Waiting for input..</span></span>
+
+                <span class="nav" id="MinID">Min: <span class="textBox">Waiting for input..</span></span>
+
+                <span class="nav" id="SumID">Sum: <span class="textBox">Waiting for input..</span></span>
+
+                <span class="nav" id="AvgID">Average: <span class="textBox">Waiting for input..</span></span>
+
+                <span class="nav" id="RevID">Reverse order:<span class="textBox">Waiting for input..</span></span>
+
+            </div>
+        </center>
+
+        <script>
+
+            $('#inputID').on('input',function(e){
+
+                inputText = $('#inputID').val();
+
+                if (inputText!=null) {
+                    try {
+
+                        //now split it into arrays
+
+                        stringArray = inputText.split(',');
+                        console.log(stringArray);
+                        
+                        numArray = convertToInt(stringArray);
+                        console.log(numArray);
+
+                        //now we need to apply each of five different functions here
+
+                        maxNum = findMax(numArray);
+                        minNum = findMin(numArray);
+                        sumNum = findSum(numArray);
+                        avgNum = findAvg(numArray);
+                        reverseArr = findReverse(numArray);
+                        
+                        
+                    //     //now we need to inject it into each html
+                        document.getElementById('MaxID').innerHTML = 'Max: ' + String(maxNum);
+                        document.getElementById('MinID').innerHTML = 'Min: ' + String(minNum);
+                        document.getElementById('SumID').innerHTML = 'Sum: ' + String(sumNum);
+                        document.getElementById('AvgID').innerHTML = 'Average: ' + String(avgNum);
+                        document.getElementById('RevID').innerHTML = 'Reverse Order: ' + String(reverseArr);
+
+                    }
+
+
+                    catch(err) {
+                        alert('Please follow the format');
+                        console.log(e)
+                    }
+
+                }
+
+                else {
+                    alert('Please provide the imput number first');
+                }
+
+            });
+
+
+
+            //converting the string elements in the Array into integers
+
+            function convertToInt(stringArray){
+                numArray= [];
+                for (i=0; i<stringArray.length; i++){
+                    console.log("Entring loop...");
+                    numArray.push(parseInt(stringArray[i]));
+                }
+                console.log(numArray);
+                return numArray;
+                
+            }
+
+            function findMax(inputArr){
+                let Max = 0;
+                for ( let i = 0; i < inputArr.length; i++){
+                    currNum = inputArr[i];
+                    if (currNum>=Max){
+                        Max = currNum;
+                    }
+                   
+                }
+                console.log("maxNum = "+Max);
+                return Max;
+            }
+
+            function findMin(inputArr){
+                let Min=inputArr[0];
+                for ( let i = 0; i < inputArr.length; i++){
+                    currNum = inputArr[i];
+                    if (currNum<=Min){
+                        Min = currNum;
+                    }
+                }
+                console.log("minNum = "+Min);
+                return Min;
+            }
+
+            function findAvg(inputArr){
+                let sum = 0, avg = 0;
+                for ( let i = 0; i < inputArr.length; i++){
+                    sum+= inputArr[i];
+                }
+                avg = sum/(inputArr.length-1);
+                console.log("Avg = "+avg);
+                return avg;
+            }
+
+            function findSum(inputArr){
+                let sum = 0;
+                for ( let i = 0; i < inputArr.length; i++){
+                    sum+= inputArr[i];
+                }
+                console.log("sum = "+sum);
+                return sum;
+            }
+
+            function findReverse(inputArr){
+                numArray= [];
+                for (i=inputArr.length-1; i>=0; i--){
+                    console.log("Entring loop...");
+                    numArray.push(parseInt(inputArr[i]));
+                }
+                console.log(numArray);
+                return numArray;
+            }
+            
+        </script>
+
+    </body>
+</html>

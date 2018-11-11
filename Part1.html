@@ -1,0 +1,259 @@
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+        
+        <title> Assignment 2 ~ CSE391 </title>                        
+        <style>
+            .quoteBox{
+                /* height: 7%;
+                width: 75%; */
+                padding:2%;
+                position: relative;
+                display: inline-block;
+                border: 1px solid black;
+                background-color:pink;
+                text-align: center;
+                background-attachment: center;
+                margin: 5%;
+                color:black;
+                
+            }
+
+            .content{
+                justify-content: 'center';
+                align-items: 'center';
+                flex:1;
+                position: relative;
+                display: inline-block;
+                margin-top:1%;    
+                color:black;
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+            }
+
+            #colorBox{
+                height: 62px;
+                width: 62px;
+                position: relative;
+                display: inline-block;
+                border: 1px solid;
+                top: 13%;
+                left: -5%;
+                background-color: black;
+                color:red;
+
+            }
+
+            .colorOptions{
+                height: 24.5px;
+                width: 23.5px;
+                margin: 2%;
+                position: relative;
+                display: inline-block;
+                border: 1px solid;
+                cursor:pointer;
+            }
+            
+            #tomato{
+                background-color:tomato;
+                border:1px solid darkred;
+            }
+            #green{
+                background-color:lightgreen;
+                border:1px solid darkgreen;
+            }
+            #aliceblue{
+                background-color:aliceblue;
+                border:1px solid blue;
+            }
+            #pink{
+                background-color:pink;
+                border:1px solid tomato;
+            }
+
+            #heroConverter{
+                /* height: 7%; */
+                width: 50%;
+                padding:2%;
+                position: relative;
+                display: inline-block;
+                border: 1px solid black;
+                background-color:white;
+                text-align: center;
+                background-attachment: center;
+                margin: 5%;
+                color:black;s
+                
+            }
+
+            #converterBox{
+                float: left;
+                font-size: 120%;
+                margin-right:2%;
+            }
+
+            #textArea{
+                width: 155px;
+                height: 20px;
+                border: 1px solid black;
+                float: left;
+                position: relative;
+                display: inline-block;
+                margin-left: 2%;
+            }
+
+        </style>
+    </head>
+
+
+    
+    <body>
+        <div class="quoteBox" id="quoteBox_id">
+            <div class=content id="content">
+
+            </div>
+        </div>
+        <div id="colorBox">
+            <div class="colorOptions" id="tomato"></div>
+            <div class="colorOptions" id="green"></div>
+            <div class="colorOptions" id="aliceblue"></div>
+            <div class="colorOptions" id="pink"></div>
+        </div>
+
+        <div id="heroConverter">
+            <div id="converterBox">Convert</div>
+            <input type="number" class="inputNum" id="inputNum_ID" min="0" style="float:left; margin-left: 2%">
+        
+                <select id="mySelect" style="float:left; margin-left: 2%">
+                    <option value="lbTOkg">lb to kg</option>
+                    <option value="kgTOlb">kg to lb</option>
+                </select>
+                <div class="submitButton" id="submitButton_ID" style="float:left; margin-left: 2%">GO</div>
+
+            <span class="output" id="output_ID" style="float:left; margin-left: 2%">Waiting for input..</span>
+        </div>
+
+        <script>
+
+            $(document).ready(function(){
+                let quoteSource=[
+                                    {
+                                        quote:"Do not take life too seriously. You will never get out of it alive.",
+                                        name:"Elbert Hubbard"
+                                    },
+                                    {
+                                        quote:"People who think they know everything are a great annoyance to those of us who do.",
+                                        name:"Isaac Asimov"
+                                    },
+                                    {
+                                        quote:"Procrastination is the art of keeping up with yesterday.",
+                                        name:"Don Marquis"
+                                    },
+                                    {
+                                        quote:"Get your facts first, then you can distort them as you please.",
+                                        name:"Mark Twain"
+                                    },
+                                    {
+                                        quote:"A day without sunshine is like, you know, night.",
+                                        name:"Steve Martin"
+                                    },
+                                    {
+                                        quote:"My grandmother started walking five miles a day when she was sixty. She's ninety-seven now, and we don't know where the hell she is.",
+                                        name:"Ellen DeGeneres"
+                                    },
+                                    {
+                                        quote:"Don't sweat the petty things and don't pet the sweaty things.",
+                                        name:"George Carlin"
+                                    },
+                                    {
+                                        quote:"Always do whatever's next.",
+                                        name:"George Carlin"
+                                    },
+                                    {
+                                        quote:"Atheism is a non-prophet organization.",
+                                        name:"George Carlin"
+                                    },
+                                    {
+                                        quote:"Happiness is not something ready made. It comes from your own actions.",
+                                        name:"Dalai Lama"
+                                    }];
+                
+                const myRandomNumber = randomGenerate(0, quoteSource.length);
+
+                quote = quoteSource[myRandomNumber]['quote'];
+                name = quoteSource[myRandomNumber]['name'];
+
+                let t = document.createTextNode(quote + " - " + name);
+
+                document.getElementById('content').appendChild(t);
+
+
+            });
+
+            function randomGenerate(start, end){
+                //Generates a number between given two points
+                randomValue = Math.floor((Math.random() * end) + start);
+                return randomValue;
+            }
+
+            $('#green').click(function(){                
+
+                $('#quoteBox_id').css({"background-color":"lightgreen","border":"1px solid darkgreen","color":"green" });
+            });
+            
+            $('#tomato').click(function(){                
+
+            $('#quoteBox_id').css({"background-color":"tomato","border":"1px solid darkred","color":"black" });
+            });
+
+            $('#aliceblue').click(function(){                
+
+            $('#quoteBox_id').css({"background-color":"aliceblue","border":"1px solid blue","color":"blue" });
+            });
+
+            $('#pink').click(function(){                
+
+            $('#quoteBox_id').css({"background-color":"pink","border":"1px solid tomato","color":"tomato" });
+            });
+            
+            
+            
+
+            $('#submitButton_ID').click(function(){
+
+                let selectedMode = $('#mySelect').val();
+
+                let inputNumber = $('#inputNum_ID').val();
+
+                if ((selectedMode == 'lbTOkg') && (inputNumber!=null)){
+
+                    let convertedNumber = inputNumber*(0.4536);
+
+                    document.getElementById('output_ID').innerHTML = String(convertedNumber);
+
+                }
+
+                else if ((selectedMode == 'kgTOlb') && (inputNumber!=null)) {
+
+                    let selectedMode = $('#mySelect').val();
+
+                     let inputNumber = $('#inputNum_ID').val();
+
+                        let convertedNumber = inputNumber*(2.2046);
+
+                        document.getElementById('output_ID').innerHTML = String(convertedNumber);                    
+
+
+                }
+
+            });        
+        </script>   
+    </body>
+</html>

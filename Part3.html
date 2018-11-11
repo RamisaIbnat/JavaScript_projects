@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+        
+        <title> Assignment 2 ~ CSE391 </title>  
+        <style>
+
+            body{
+                margin: 0 0;
+                padding: 0 0;
+            }
+
+        .Container{
+            top: 30%;
+            position: relative;
+            width: 100%;
+            height: 79.7%;
+            display: inline-block;
+            background-color: #009688;
+            padding-top: 10%;
+            }
+        
+        #mainInput_ID{
+                height: 41%;
+                width: 38%;
+                position: relative;
+                display: inline-block;
+                border: 2px solid navy;
+
+            }
+
+        .navbar{
+            position: relative;
+            display: inline-block;
+            background-color: aquamarine;
+            color: navy;
+            height: 4%;
+            /* width: 7%; */
+            font-family: cursive;
+            padding: 0.5%;
+            margin-top: 2%;
+            border: 1px solid navy;
+            cursor: pointer;
+        }
+
+        </style>
+    </head>
+
+    <body>
+        <center>
+        <div class="Container">
+
+            <h1>Magic!</h1>
+
+            <Textarea class="mainInput" id="mainInput_ID">
+
+
+
+            </Textarea>
+
+            <div class="ControlContainer">
+                <div class="navbar" id="Clear">Clear It</div>
+                <div class="navbar" id="Capitalize">Capitalize</div>
+                <div class="navbar" id="Sort">Sort</div>
+                <div class="navbar" id="Reverse">Reverse</div>
+                <div class="navbar" id="StripBlank">Strip Blank</div> 
+                <div class="navbar" id="AddNum">Add Numbers</div>
+                <div class="navbar" id="Shuffle">Shuffle</div>
+            </div>
+        </div>
+    </center>
+        
+
+
+        <script>
+
+            innerText = $('#mainInput_ID').val();
+    
+            //when the clear button is clicked delete everything inside the text field
+            $('#Clear').click(function(){
+                $('#mainInput_ID').val(null);
+            });
+
+             $('#Capitalize').click(function(){
+                text = $('#mainInput_ID').val();
+                newText = text.toUpperCase() ;
+                $('#mainInput_ID').val(newText);
+            });
+
+            $('#Sort').click(function(){
+                text = $('#mainInput_ID').val();
+                textArrbyLINE = text.split("\n");
+
+                sortedArray =  textArrbyLINE.sort();
+                textArrbyLINE = sortedArray;             
+
+                textArrbyLINE = textArrbyLINE.join("\n");
+                console.log(textArrbyLINE);
+                $('#mainInput_ID').val(textArrbyLINE);
+            });
+
+            $('#Reverse').click(function(){
+                text = $('#mainInput_ID').val();
+                textArrbyLINE = text.split("\n");
+
+                for (let i=0; i<textArrbyLINE.length; i++){
+                    let currText  = textArrbyLINE[i];
+                    // let reversedString = reverseString(currText);
+                    // textArrbyLINE[i] = currText;
+                    textArrbyLINE[i]= currText.split("").reverse().join("");
+                    
+                }
+                textArrbyLINE = textArrbyLINE.join("\n");
+                console.log(textArrbyLINE);
+                $('#mainInput_ID').val(textArrbyLINE);
+            });
+
+            $('#StripBlank').click(function(){
+                text = $('#mainInput_ID').val();
+                textArrbyLINE = text.split("\n");
+
+                for (let i=0; i<textArrbyLINE.length; i++){
+                    
+                    if(textArrbyLINE[i]==""){
+                        textArrbyLINE.splice(i,1);
+                        i--;
+                    }
+                    else{
+                        let currText = textArrbyLINE[i];
+                        currText = currText.trim();
+                        textArrbyLINE[i] = currText;
+                    }
+                }            
+
+                textArrbyLINE = textArrbyLINE.join("\n");
+                console.log(textArrbyLINE);
+                $('#mainInput_ID').val(textArrbyLINE);
+            });
+
+            $('#AddNum').click(function(){
+                text = $('#mainInput_ID').val();
+                textArrbyLINE = text.split("\n");
+
+                for (let i=0; i<textArrbyLINE.length; i++){
+                    let j=i+1;
+                    let currText  = String(j)+". "+ textArrbyLINE[i];
+                    textArrbyLINE[i] = currText;
+                    
+                }
+                textArrbyLINE = textArrbyLINE.join("\n");
+                console.log(textArrbyLINE);
+                $('#mainInput_ID').val(textArrbyLINE);
+            });
+
+            $('#Shuffle').click(function(){
+                text = $('#mainInput_ID').val();
+                textArrbyLINE = text.split("\n");
+
+                for (var i = textArrbyLINE.length-1; i >=0; i--) {
+     
+                    var randomIndex = Math.floor(Math.random()*(i+1)); 
+                    var itemAtIndex = textArrbyLINE[randomIndex]; 
+                    
+                    textArrbyLINE[randomIndex] = textArrbyLINE[i]; 
+                    textArrbyLINE[i] = itemAtIndex;
+                    }
+
+                textArrbyLINE = textArrbyLINE.join("\n");
+                console.log(textArrbyLINE);
+                $('#mainInput_ID').val(textArrbyLINE);
+            });
+
+
+            Math.floor(Math.random() * 100) + 1
+
+
+
+
+        
+        </script>
+    </body>
+</html>
